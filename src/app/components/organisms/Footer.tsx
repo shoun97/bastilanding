@@ -23,7 +23,6 @@ export default function VerMasSection() {
   return (
     <Box
       sx={{
-        bgcolor: '#1D2B7B',
         color: 'white',
         textAlign: 'center',
         py: 6,

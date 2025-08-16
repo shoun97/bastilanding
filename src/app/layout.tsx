@@ -4,7 +4,7 @@ import "./globals.css";
 import '@fontsource/manrope/200.css';
 import '@fontsource/manrope/400.css';
 import '@fontsource/manrope/700.css';
-
+import GlobalAnimatedEspiral from "@/components/atoms/GlobalAnimatedEspiral";
 
 
 const geistSans = Geist({
@@ -28,13 +28,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-
-        {children}
+    <html lang="es">
+      <body style={{ backgroundColor: "#04071a" }}>
+        <GlobalAnimatedEspiral />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {children}
+        </div>
       </body>
     </html>
   );
+
 }

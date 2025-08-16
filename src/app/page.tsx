@@ -9,6 +9,9 @@ import Servicios from "./components/organisms/ServiciosSections";
 import { Box } from "@mui/material";
 import ContactoSection from "./components/organisms/ContactoSection";
 import Footer from "./components/organisms/Footer";
+import RecentProjects from "./components/organisms/RecentProyects";
+import UltimaExperienciaLaboral from "./components/organisms/UltimaExperienciaLaboral";
+import FormacionContinua from "./components/organisms/FormacionContinua";
 
 export default function Home() {
   return (
@@ -16,7 +19,7 @@ export default function Home() {
       <TopAppBar />
       <Box
         sx={{
-          backgroundImage: 'url("/hero-bg.png")',
+          /* backgroundImage: 'url("/hero-bg.png")', */
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -26,6 +29,9 @@ export default function Home() {
         <AboutMe />
       </Box>
       <Servicios/>
+      <RecentProjects/>
+      <UltimaExperienciaLaboral/>
+      <FormacionContinua/>
       <TestimoniosYResultados/>
       <ContactoSection/>
       <Footer/>

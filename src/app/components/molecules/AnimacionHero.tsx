@@ -4,8 +4,10 @@ import Image from 'next/image';
 
 export default function AnimacionHero() {
   return (
-    <Box sx={{ width: 264, height: 55 }}>
-      <Image src="/hero-icon.svg" alt="Animación Hero" width={264} height={55} />
+    <Box sx={{
+      display: "flex"
+    }}>
+      <Image src="/logo_bland.png" alt="Animación Hero" width={150} height={150} />
     </Box>
   );
 }

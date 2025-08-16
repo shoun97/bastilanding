@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'api.blandskron.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'blandskron.com', pathname: '/**' },
+    ],
+  },
 };
 
 export default nextConfig;

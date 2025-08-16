@@ -1,8 +1,6 @@
 "use client";
 import { Box, Typography, Button } from "@mui/material";
-import AnimacionHero from "../molecules/AnimacionHero";
-import AnimatedGradient from "../atoms/AnimatedGradientHero";
-import ImageCluster from "../molecules/ImageCluster"
+import AnimatedEspiral from "../atoms/AnimatedEspiral"; // importa el que hicimos antes
 
 export default function HeroImpactante() {
   return (
@@ -19,24 +17,27 @@ export default function HeroImpactante() {
         px: 2,
       }}
     >
-
-      {/* Animación central */}
-      <Box sx={{ zIndex: 2, mb: 2 }}>
-        <AnimacionHero />
+      {/* Fondo animado */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+        }}
+      >
+       {/*  <AnimatedEspiral speed="16s" saturation={1.3} />  a*/}
       </Box>
 
       {/* Texto y botón */}
-      <Box sx={{ zIndex: 2 }}>
+      <Box sx={{ zIndex: 1 }}>
         <Typography
           sx={{
             mt: 2,
             width: "288px",
             color: "rgba(255, 255, 255, 0.90)",
             textAlign: "center",
-            fontFeatureSettings: "'liga' off, 'clig' off",
             fontFamily: "Manrope",
             fontSize: "25px",
-            fontStyle: "normal",
             fontWeight: 200,
             lineHeight: "133.4%",
           }}
@@ -46,17 +47,14 @@ export default function HeroImpactante() {
 
         <Typography
           variant="h4"
-          color="white"
           sx={{
             mt: 1,
             width: "288px",
             color: "rgba(255, 255, 255, 0.90)",
             textAlign: "center",
-            fontFeatureSettings: "'liga' off, 'clig' off",
             textShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
             fontFamily: "Manrope",
             fontSize: "40px",
-            fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "116.7%",
           }}
@@ -71,14 +69,10 @@ export default function HeroImpactante() {
             height: "42px",
             marginTop: "46px",
             padding: "8px 22px",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
             borderRadius: "38px",
-            backgroundColor: "#20339F",
-            color: "primary.contrastText",
+            backgroundColor: "#4E35AA",
             textTransform: "none",
-            boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2)",
+            boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.2)",
             fontWeight: 500,
             fontSize: "1rem",
             "&:hover": {
@@ -89,8 +83,8 @@ export default function HeroImpactante() {
           Trabajemos juntos
         </Button>
       </Box>
-      <Box sx={{marginTop: "50px"}}/>
 
+      <Box sx={{ marginTop: "50px" }} />
     </Box>
   );
 }

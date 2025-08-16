@@ -21,8 +21,9 @@ import SchoolIcon from "@mui/icons-material/School";
 import DescriptionIcon from "@mui/icons-material/Description";
 import FolderIcon from "@mui/icons-material/Folder";
 import LogoIcon from "../atoms/LogoIcon";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import AnimacionHero from "../molecules/AnimacionHero";
 
 const navItems = [
   { text: "Home", icon: <HomeIcon /> },
@@ -34,7 +35,6 @@ const navItems = [
 
 export default function MyAppBar() {
   const [open, setOpen] = useState(false);
-
   return (
     <>
       <AppBar
@@ -44,27 +44,17 @@ export default function MyAppBar() {
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 2,
           color: "#fff",
-          blur: "10px"
+          borderBottom: "1px solid rgba(255, 255, 255, 0.50)", 
+          background: "rgba(0, 0, 0, 0.30)",
+          backdropFilter: "blur(15px)",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
-          <Box
-            component="svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 54"
-            sx={{
-              width: 100,
-              height: 54,
-              color: "#fff", 
-              marginTop: "20px"
-            }}
-          >
-            <LogoIcon />
-          </Box>
+          <AnimacionHero />
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <IconButton sx={{ color: "#fff" }}>
-               <LightModeIcon />
+              <LightModeIcon />
             </IconButton>
             <IconButton sx={{ color: "#fff" }} onClick={() => setOpen(!open)}>
               {open ? <CloseIcon /> : <MenuIcon />}
@@ -92,7 +82,7 @@ export default function MyAppBar() {
               background: "rgba(255,255,255,0.2)",
               backdropFilter: "blur(10px)",
               borderRadius: 0,
-              color: "#fff", // 👈 texto e íconos en blanco
+              color: "#fff",
             }}
           >
             <List>

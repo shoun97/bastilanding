@@ -22,7 +22,6 @@ export default function ContactoSection() {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(to bottom, #2A64E1, #4F8FEA)',
         color: 'white',
         py: 6,
         px: 3,
