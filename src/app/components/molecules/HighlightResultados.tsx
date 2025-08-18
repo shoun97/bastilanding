@@ -25,16 +25,29 @@ export default function HighlightResultados() {
         Logros visibles. Opiniones reales.
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={6} md={3}>
-          <Typography variant="h4" fontWeight="bold">+30</Typography>
-          <Typography variant="body2">proyectos completados</Typography>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <Typography variant="h4" fontWeight="bold">★ 4.9</Typography>
-          <Typography variant="body2">Promedio en feedback</Typography>
-        </Grid>
-      </Grid>
+      <marquee>
+        <div style={{
+          display: "flex",
+          gap: "12px"
+        }}>
+            <div>
+              <Typography variant="h4" fontWeight="bold">+30</Typography>
+              <Typography variant="body2">proyectos completados</Typography>
+            </div>
+            <div item xs={6} md={3}>
+              <Typography variant="h4" fontWeight="bold">★ 4.9</Typography>
+              <Typography variant="body2">Promedio en feedback</Typography>
+            </div>
+            <div>
+              <Typography variant="h4" fontWeight="bold">+30</Typography>
+              <Typography variant="body2">proyectos completados</Typography>
+            </div>
+            <div item xs={6} md={3}>
+              <Typography variant="h4" fontWeight="bold">★ 4.9</Typography>
+              <Typography variant="body2">Promedio en feedback</Typography>
+            </div>
+        </div>
+      </marquee>
     </Box>
   );
 }

@@ -45,7 +45,6 @@ export default function ProjectsCarouselLikeShot({
     animation: { duration: durationMs, easing: (t) => 1 - Math.pow(1 - t, 3) },
   });
 
-  // ======== CARRIL DE FONDO (parallax) ========
   const REP = 7; 
   const BACK_SCALE = 0.9;
   const BACK_PARALLAX = 0.33;
@@ -61,7 +60,6 @@ export default function ProjectsCarouselLikeShot({
 
   const backCenterIndex = Math.floor(REP / 2) * n + active - BACK_KEEP_BEHIND;
 
-  // Progreso continuo del slider frontal translate parallax del fondo
   const backTxPx =
     (backCenterIndex + (progressRef.current - active)) *
       backSlideW *
@@ -77,7 +75,6 @@ export default function ProjectsCarouselLikeShot({
         overflow: 'visible',
       }}
     >
-      {/* ===== Carril de fondo (blur y opacidad) ===== */}
       <Box
         sx={{
           position: 'absolute',

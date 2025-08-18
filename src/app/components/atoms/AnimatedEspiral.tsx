@@ -1,125 +1,154 @@
 import React from "react";
 
-/**
- * SwirlBackground – fondo animado tipo vórtice (blue/purple glow)
- *
- *
- * Uso:
- *   import SwirlBackground from "@/components/SwirlBackground";
- *   export default function Page(){
- *     return (
- *       <main style={{height:"100dvh"}}>
- *         <SwirlBackground speed="16s" saturation={1.3} />
- *       </main>
- *     )
- *   }
- */
-
 type Props = {
   speed?: string;
   saturation?: number;
   blur?: number;
+  colorChangeSpeed?: string;
+  /** Rangos de tono permitidos (HSL) en grados 0–360 */
+  hue1?: [number, number]; // capa ::before
+  hue2?: [number, number]; // capa ::after
 };
 
-export default function EspiralBackground({ speed = "14s", saturation = 1.4, blur = 60 }: Props) {
+export default function EspiralBackground({
+  speed = "14s",
+  saturation = 1.4,
+  blur = 80,
+  colorChangeSpeed = "20s",
+  hue1 = [250, 280], 
+  hue2 = [210, 260], 
+}: Props) {
   return (
     <div
       className="swirl"
-      style={{
-        // CSS custom properties – se pueden ajustar desde props perdón por tanto @ts-ignore... Quiero dormir perrooooooooooooo aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        // @ts-ignore - CSS var custom
-        "--speed": speed,
-        // @ts-ignore
-        "--sat": String(saturation),
-        // @ts-ignore
-        "--blur": `${blur}px`,
-      }}
+      style={
+        {
+          // @ts-ignore
+          "--speed": speed,
+          // @ts-ignore
+          "--sat": String(saturation),
+          // @ts-ignore
+          "--blur": `${blur}px`,
+          // @ts-ignore
+          "--color-change-speed": colorChangeSpeed,
+          // @ts-ignore
+          "--h1-min": hue1[0],
+          // @ts-ignore
+          "--h1-max": hue1[1],
+          // @ts-ignore
+          "--h2-min": hue2[0],
+          // @ts-ignore
+          "--h2-max": hue2[1],
+        } as React.CSSProperties
+      }
     >
-      {/* Capa opcional para contenido */}
-      <div className="content">
-      </div>
+      <div className="content" />
 
       <style jsx>{`
-        /* Registro de la propiedad animada para interpolación suave */
         @property --angle {
-          syntax: '<angle>';
+          syntax: "<angle>";
           inherits: false;
           initial-value: 0deg;
         }
+        @property --hue-1 {
+          syntax: "<number>";
+          inherits: false;
+          initial-value: 260;
+        }
+        @property --hue-2 {
+          syntax: "<number>";
+          inherits: false;
+          initial-value: 220;
+        }
+        /* límites tipados para poder animar entre min/max */
+        @property --h1-min { syntax: "<number>"; inherits: false; initial-value: 230; }
+        @property --h1-max { syntax: "<number>"; inherits: false; initial-value: 300; }
+        @property --h2-min { syntax: "<number>"; inherits: false; initial-value: 210; }
+        @property --h2-max { syntax: "<number>"; inherits: false; initial-value: 280; }
 
         .swirl {
           position: relative;
           width: 100%;
           height: 100%;
           overflow: hidden;
-          background: radial-gradient(120% 120% at 50% 50%, #07102e 0%, #050b23 45%, #04071a 100%);
-          isolation: isolate; /* mezcla correcta de capas */
+          background: radial-gradient(
+            120% 120% at 50% 50%,
+            #07102e 0%,
+            #050b23 45%,
+            #04071a 100%
+          );
+          isolation: isolate;
         }
 
         .swirl::before {
-          content: '';
+          content: "";
           position: absolute;
-          inset: -22%; /* margen extra para que el blur no corte */
+          inset: -30%;
           --angle: 0deg;
-          background: conic-gradient(from var(--angle),
-            rgba(135, 0, 255, .3) 0 85deg,
-            rgba(0, 105, 255, .3) 85deg 180deg,
-            rgba(135, 0, 255, .3) 180deg 265deg,
-            rgba(0, 105, 255, .3) 265deg 360deg
+          background: conic-gradient(
+            from var(--angle),
+            hsla(var(--hue-1), 100%, 50%, 0.30) 0 85deg,
+            hsla(var(--hue-2), 100%, 50%, 0.30) 85deg 180deg,
+            hsla(var(--hue-1), 100%, 50%, 0.30) 180deg 265deg,
+            hsla(var(--hue-2), 100%, 50%, 0.30) 265deg 360deg
           );
           filter: blur(var(--blur)) saturate(var(--sat));
-          transform: translateZ(0);
-          will-change: filter;
           mix-blend-mode: screen;
-          animation: spin var(--speed) linear infinite;
+          animation:
+            spin var(--speed) linear infinite,
+            clampHues var(--color-change-speed) ease-in-out infinite alternate;
         }
 
         .swirl::after {
-          content: '';
+          content: "";
           position: absolute;
-          inset: -25%;
+          inset: -35%;
           --angle: 180deg;
-          background: conic-gradient(from var(--angle),
-            rgba(0, 55, 255, .45) 0 90deg,
-            rgba(156, 0, 255, .45) 90deg 180deg,
-            rgba(0, 55, 255, .45) 180deg 270deg,
-            rgba(156, 0, 255, .45) 270deg 360deg
+          background: conic-gradient(
+            from var(--angle),
+            hsla(var(--hue-2), 100%, 50%, 0.45) 0 90deg,
+            hsla(var(--hue-1), 100%, 50%, 0.45) 90deg 180deg,
+            hsla(var(--hue-2), 100%, 50%, 0.45) 180deg 270deg,
+            hsla(var(--hue-1), 100%, 50%, 0.45) 270deg 360deg
           );
-          filter: blur(calc(var(--blur) * 0.9)) saturate(calc(var(--sat) * 0.9));
+          filter: blur(calc(var(--blur) * 1.2)) saturate(calc(var(--sat) * 0.9));
           mix-blend-mode: screen;
-          animation: spin-rev calc(var(--speed) * 1.25) linear infinite;
+          animation:
+            spin-rev calc(var(--speed) * 1.25) linear infinite,
+            clampHues var(--color-change-speed) ease-in-out infinite alternate-reverse;
         }
-
-        /* Vignette suave para oscurecer bordes y dar foco central */
-        .swirl :global(.vignette), .swirl .vignette { display: none; }
-        .swirl > :global(.vignette), .swirl > .vignette { display: block; }
 
         .content {
           position: relative;
-          z-index: 1; /* sobre las capas del vórtice */
+          z-index: 1;
           width: 100%;
           height: 100%;
           display: grid;
           place-items: center;
           color: white;
-          text-shadow: 0 3px 20px rgba(0,0,0,.45);
+          text-shadow: 0 3px 20px rgba(139, 15, 119, 0.45);
         }
 
-        .swirl::marker { content: none; }
+        @keyframes spin { to { --angle: 360deg; } }
+        @keyframes spin-rev { to { --angle: -180deg; } }
 
-        @keyframes spin {
-          to { --angle: 360deg; }
-        }
-        @keyframes spin-rev {
-          to { --angle: -180deg; }
-        }
-
-        .swirl:after {
-          /* esto es como una mascara basti por si lees acá hola esimado y perdon por la demora pero si o si estará antes de septiembre */
+        /* Animación restringida: solo oscila entre min y max */
+        @keyframes clampHues {
+          from {
+            --hue-1: var(--h1-min);
+            --hue-2: var(--h2-min);
+          }
+          to {
+            --hue-1: var(--h1-max);
+            --hue-2: var(--h2-max);
+          }
         }
 
         @supports (-webkit-touch-callout: none) {
-          .swirl::before, .swirl::after { filter: blur(var(--blur)) saturate(calc(var(--sat) * 1.05)); }
+          .swirl::before,
+          .swirl::after {
+            filter: blur(calc(var(--blur) * 1.1)) saturate(calc(var(--sat) * 1.05));
+          }
         }
       `}</style>
     </div>

@@ -5,6 +5,7 @@ import { Box, Stack, Skeleton, Typography } from "@mui/material";
 import TituloRecentProyects from "../atoms/TituloRecentProyects";
 import dynamic from "next/dynamic";
 import { listJobs, type Job } from "@/integrations";
+import TituloFormacionContinua from "../atoms/TituloFormacionContinua";
 
 const ProjectsCarousel = dynamic(() => import("./ProjectsCarouselSwiper"), {
   ssr: false,
@@ -80,12 +81,7 @@ function LoadingCarousel({
   const items = Array.from({ length: count });
   return (
     <Box role="status" aria-label="Cargando proyectos" sx={{ width: "100%" }}>
-      <Typography
-        variant="body2"
-        sx={{ color: "rgba(255,255,255,0.9)", mb: 2, textAlign: "center" }}
-      >
-        Cargando proyectos…
-      </Typography>
+
       <Box
         sx={{
           display: "flex",
@@ -215,7 +211,7 @@ export default function FormacionContinua() {
           alignItems="center"
           width="100%"
         >
-          <TituloRecentProyects />
+            <TituloFormacionContinua/>
         </Box>
         {content}
       </Stack>

@@ -56,7 +56,7 @@ export default function ServiceCard({
 
       <CardContent>
         {/* Línea decorativa (solo 20px debajo de la imagen) */}
-        <Box mt={2}>
+        <Box mt={2} sx={{}}>
           <LineaDecorativa />
         </Box>
 

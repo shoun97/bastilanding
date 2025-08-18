@@ -71,24 +71,20 @@ export default function ProjectsCarousel({
     >
       <GlobalStyles
         styles={{
-          /* Opacidad base y transición suave */
           '.pc-swiper .swiper-slide': {
             opacity: 0.28,
             transition: 'opacity 600ms ease, transform 600ms cubic-bezier(0.22,1,0.36,1)',
             willChange: 'opacity, transform',
           },
-          /* Las vecinas un poco más visibles */
           '.pc-swiper .swiper-slide-prev, .pc-swiper .swiper-slide-next': {
             opacity: 0.62,
           },
-          /* La activa al 100% (incluye duplicadas por loop) */
           '.pc-swiper .swiper-slide-active, .pc-swiper .swiper-slide-duplicate-active': {
             opacity: 1,
           },
         }}
       />
 
-      {/* Carrusel */}
       <Swiper
         key={`slides-${loopItems.length}`}
         modules={[EffectCoverflow, Keyboard]}

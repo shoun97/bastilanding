@@ -1,4 +1,3 @@
-// src/integrations/index.ts
 import axios, { AxiosRequestConfig } from "axios";
 
 export const api = axios.create({
@@ -23,7 +22,6 @@ type Query = Record<string, string | number | boolean | null | undefined>;
 const clean = (q?: Query) =>
   q ? Object.fromEntries(Object.entries(q).filter(([, v]) => v != null)) : q;
 
-// evita /api/api/... cuando baseURL ya termina en /api
 const normalize = (p: string) => {
   const withSlash = p.startsWith("/") ? p : `/${p}`;
   return withSlash.replace(/^\/api\/?/, "/");
@@ -41,7 +39,6 @@ export async function get<T = unknown>(
   return data;
 }
 
-/* ======================= Endpoints ======================= */
 
 export type Cv = unknown;
 export const getCv = (query?: Query, config?: AxiosRequestConfig) =>
@@ -55,7 +52,6 @@ export type GalleryItem = unknown;
 export const getGallery = (query?: Query, config?: AxiosRequestConfig) =>
   get<GalleryItem[]>("/gallery/", query, config);
 
-/* ---------- JOBS (tipado real + paginación) ---------- */
 
 export type Paginated<T> = {
   count: number;
@@ -68,7 +64,7 @@ export type JobGalleryItem = {
   id: number;
   title: string;
   width: number;
-  high: number;       // viene como "high" en la doc
+  high: number;       
   url: string;
   section: string;
   type: string;
@@ -79,11 +75,11 @@ export type Job = {
   title: string;
   description: string;
   gallery: JobGalleryItem[];
-  date_start: string;   // YYYY-MM-DD
-  date_finish: string;  // YYYY-MM-DD
-  img_portada: string;  // URL de portada
-  tecnologias: string;  // "React, Django, MUI"
-};
+  date_start: string;   
+  date_finish: string;  
+  img_portada: string;  
+  tecnologias: string; 
+}
 
 export type JobsQuery = {
   page?: number;

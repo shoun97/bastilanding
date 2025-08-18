@@ -70,7 +70,7 @@ export default function HeroImpactante() {
             marginTop: "46px",
             padding: "8px 22px",
             borderRadius: "38px",
-            backgroundColor: "#4E35AA",
+            backgroundColor: "#1F2491",
             textTransform: "none",
             boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.2)",
             fontWeight: 500,
@@ -88,3 +88,5 @@ export default function HeroImpactante() {
     </Box>
   );
 }
+
+
