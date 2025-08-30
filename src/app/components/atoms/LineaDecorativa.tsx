@@ -8,7 +8,7 @@ export default function LineaDecorativa() {
         width="100%"
         height="31"
         viewBox="0 0 320 31"
-        style={{ maxWidth: 320 }}
+        style={{ maxWidth: 320, zIndex: 300 }}
       >
         <path stroke="#3CBAE3" strokeWidth="2" d="M16 15.5h125.5" />
         <path

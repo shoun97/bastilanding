@@ -32,17 +32,16 @@ export default function ServiceCard({
         color: "white",
         overflow: "visible",
         position: "relative",
-        marginTop: "100px",
       }}
     >
       {/* Imagen flotante */}
       <Box
         sx={{
           position: "absolute",
-          top: -110,
+          top: -70,
           left: "50%",
           transform: "translateX(-50%)",
-          zIndex: 1,
+          zIndex: 0,
         }}
       >
         <Image
@@ -50,14 +49,18 @@ export default function ServiceCard({
           alt={title}
           width={120}
           height={120}
-          style={{ objectFit: "contain" }}
+          style={{
+            objectFit: "contain",
+            maxHeight: "120px",
+            minHeight: "120px",
+          }}
         />
       </Box>
 
       <CardContent>
         {/* Línea decorativa (solo 20px debajo de la imagen) */}
-        <Box mt={2} sx={{}}>
-          <LineaDecorativa />
+        <Box mt={2} sx={{ zIndex: 500 }}>
+          <LineaDecorativa  />
         </Box>
 
         {/* Subtítulo */}
