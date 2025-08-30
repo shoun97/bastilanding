@@ -75,7 +75,10 @@ export default function Home() {
 
       {/* 8. Contacto */}
       <SectionGate stage={stage} showAt={8} fallback={<ContactoSkeleton />}>
-        <ContactoSection />
+        <Box id="contacto">
+          {" "}
+          <ContactoSection />
+        </Box>
       </SectionGate>
 
       <Footer />
