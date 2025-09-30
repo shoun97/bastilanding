@@ -31,16 +31,25 @@ export default function ProjectsCarousel({
   const swiperRef = useRef<SwiperType | null>(null);
   const [active, setActive] = useState(0);
 
+  // ** FIX VISUAL & ANTI-BUG **
+  // Restauramos la duplicación para el efecto visual, pero ajustamos el loop.
+  const isDuplicated = items.length > 0 && items.length < 5;
+
   const loopItems = useMemo(() => {
     if (!items || items.length === 0) return [];
-    if (items.length >= 5) return items;
+    
+    // Si hay menos de 5 items, duplicamos hasta tener 5 (o más si quieres más visibilidad).
+    if (!isDuplicated) return items;
+
     const out: ProjectCardProps[] = [...items];
     while (out.length < 5) out.push(...items);
-    return out.slice(0, 5);
-  }, [items]);
+    return out.slice(0, 5); // Limitamos a 5 para el ejemplo
+  }, [items, isDuplicated]);
 
   const hasSlides = loopItems.length > 0;
-  const enableLoop = hasSlides && loopItems.length > 1;
+  // Desactivamos el loop nativo de Swiper (lo ponemos en 'false') solo si hemos duplicado manualmente.
+  // Esto evita el bug de indexación al usar slideToLoop.
+  const enableSwiperLoop = hasSlides && loopItems.length > 1 && !isDuplicated; 
 
   if (!hasSlides) {
     return (
@@ -57,6 +66,9 @@ export default function ProjectsCarousel({
     );
   }
 
+  // Obtenemos el índice real del item original para los puntos.
+  const realIndex = active % Math.max(items.length, 1);
+
   return (
     <Box
       ref={containerRef}
@@ -69,21 +81,7 @@ export default function ProjectsCarousel({
         borderRadius: { xs: 0, md: 6 },
       }}
     >
-      <GlobalStyles
-        styles={{
-          '.pc-swiper .swiper-slide': {
-            opacity: 0.28,
-            transition: 'opacity 600ms ease, transform 600ms cubic-bezier(0.22,1,0.36,1)',
-            willChange: 'opacity, transform',
-          },
-          '.pc-swiper .swiper-slide-prev, .pc-swiper .swiper-slide-next': {
-            opacity: 0.62,
-          },
-          '.pc-swiper .swiper-slide-active, .pc-swiper .swiper-slide-duplicate-active': {
-            opacity: 1,
-          },
-        }}
-      />
+      {/* Se eliminan los GlobalStyles que modificaban la opacidad para mantener el efecto */}
 
       <Swiper
         key={`slides-${loopItems.length}`}
@@ -94,19 +92,22 @@ export default function ProjectsCarousel({
         grabCursor
         slidesPerView="auto"
         spaceBetween={gap}
-        loop={enableLoop}
-        speed={1000}               
+        // Usamos el flag condicional para evitar el bug de indexación
+        loop={enableSwiperLoop} 
+        speed={1000}
         onSwiper={(sw) => (swiperRef.current = sw)}
-        onSlideChange={(sw) => setActive(sw.realIndex)}
+        // Usamos activeIndex en lugar de realIndex si no usamos loop nativo
+        onSlideChange={(sw) => setActive(isDuplicated ? sw.activeIndex : sw.realIndex)}
         keyboard={{ enabled: true }}
         coverflowEffect={{
-          rotate: 0,
+          // Ajustes para el efecto visual de superposición (similar a la anterior corrección)
+          rotate: 3, 
           stretch: 0,
-          depth: 140,
-          modifier: 1.25,
+          depth: 100, 
+          modifier: 3, 
           slideShadows: false,
         }}
-        style={{ overflow: 'visible', paddingBottom: 56 }}
+        style={{ overflow: 'visible', paddingBottom: 16 }} 
       >
         {loopItems.map((it, i) => (
           <SwiperSlide
@@ -135,18 +136,31 @@ export default function ProjectsCarousel({
           {items.map((_, iDot) => (
             <Box
               key={iDot}
-              onClick={() => swiperRef.current?.slideToLoop(iDot)}
+              // Si duplicamos manualmente, calculamos a qué índice de loopItems debemos ir.
+              // De lo contrario, usamos slideToLoop (si loop nativo está activo).
+              onClick={() => {
+                if (isDuplicated) {
+                  // Encuentra la primera aparición del item en el loopItems
+                  const targetIndex = loopItems.findIndex((item, index) => index % items.length === iDot);
+                  if (targetIndex !== -1) {
+                    swiperRef.current?.slideTo(targetIndex);
+                  }
+                } else {
+                  swiperRef.current?.slideToLoop(iDot);
+                }
+              }}
               sx={{
                 width: 10,
                 height: 10,
                 borderRadius: '50%',
                 cursor: 'pointer',
+                // Usamos realIndex que ya está calculado para mostrar el punto activo
                 bgcolor:
-                  iDot === (active % Math.max(items.length, 1))
+                  iDot === realIndex
                     ? 'rgba(255,255,255,.95)'
                     : 'rgba(255,255,255,.35)',
                 boxShadow:
-                  iDot === (active % Math.max(items.length, 1))
+                  iDot === realIndex
                     ? '0 0 0 3px rgba(255,255,255,.2)'
                     : 'none',
                 transition: 'all .25s',

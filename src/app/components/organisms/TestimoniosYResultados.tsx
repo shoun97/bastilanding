@@ -34,16 +34,44 @@ const testimonios = [
 
 export default function TestimoniosYResultadosSection() {
   return (
-    <Box sx={{ px: { xs: 2, md: 6 }, py: 10, background: 'linear-gradient(178deg, #20339F 0.64%, #1A2668 51.28%, #20339F 94.27%);' }}>
-      <Grid container spacing={4}>
-        {/* Columna izquierda: Highlight */}
-        <Grid item xs={12} md={4}>
-          <HighlightResultados />
-        </Grid>
+    <Box
+      sx={{
+        px: { xs: 2, md: 6 },
+        py: 10,
+        background:
+          "linear-gradient(178deg, #20339F 0.64%, #1A2668 51.28%, #20339F 94.27%)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", // centra horizontalmente
+        alignItems: "center", 
+        gap: 4, // espacio entre columnas
+      }}
+    >
+      {/* Columna izquierda: Highlight */}
+      <Box
+        sx={{
+          flex: { xs: "0 0 auto", md: "0 0 33%" }, // ocupa 1/3 en desktop
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+        }}
+      >
+        <HighlightResultados />
+      </Box>
 
-        {/* Columna derecha: Testimonios */}
-        <TestimoniosCarouselFade items={testimonios}/>
-      </Grid>
+      {/* Columna derecha: Testimonios */}
+      <Box
+        sx={{
+          flex: { xs: "0 0 auto", md: "0 0 67%" }, // ocupa 2/3 en desktop
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end", 
+        }}
+      >
+        <TestimoniosCarouselFade items={testimonios} />
+      </Box>
     </Box>
   );
 }
+
+

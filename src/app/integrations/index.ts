@@ -117,3 +117,28 @@ export const getServices = (query?: Query, config?: AxiosRequestConfig) =>
 export type SocialNetwork = unknown;
 export const getSocialNetwork = (query?: Query, config?: AxiosRequestConfig) =>
   get<SocialNetwork[]>("/social-network/", query, config);
+
+export async function post<T = unknown, B = unknown>(
+  path: string,
+  body?: B,
+  config?: AxiosRequestConfig
+): Promise<T> {
+  const { data } = await api.post<T>(normalize(path), body, config);
+  return data;
+}
+
+/* -------------------- contact -------------------- */
+
+export type ContactRequest = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+export type ContactResponse = unknown; // ajusta si tu API devuelve una forma concreta
+
+export const postContact = (
+  payload: ContactRequest,
+  config?: AxiosRequestConfig
+) => post<ContactResponse, ContactRequest>("/contact/", payload, config);
+

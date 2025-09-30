@@ -29,11 +29,11 @@ import AnimacionHero from "../molecules/AnimacionHero";
 // import LogoIcon from "../atoms/LogoIcon";
 
 const navItems = [
-  { text: "Home", icon: <HomeIcon />, url: "/" },
-  { text: "Proyectos", icon: <FolderIcon />, url: "/proyectos" },
+  /* { text: "Home", icon: <HomeIcon />, url: "/" }, */
+/*   { text: "Proyectos", icon: <FolderIcon />, url: "/proyectos" },
   { text: "Experiencia", icon: <WorkIcon />, url: "/experiencia" },
-  { text: "Educación", icon: <SchoolIcon />, url: "/educacion" },
-  { text: "Descarga CV", icon: <DescriptionIcon />, url: "/descargarCV" },
+  { text: "Educación", icon: <SchoolIcon />, url: "/educacion" }, */
+  { text: "Descarga CV", icon: <DescriptionIcon />, url: "/CV.pdf" },
 ];
 
 export default function MyAppBar() {

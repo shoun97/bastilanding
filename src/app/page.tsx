@@ -75,9 +75,17 @@ export default function Home() {
 
       {/* 8. Contacto */}
       <SectionGate stage={stage} showAt={8} fallback={<ContactoSkeleton />}>
-        <Box id="contacto">
-          {" "}
-          <ContactoSection />
+        <Box
+          id="contacto"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ maxWidth: "500px" }}>
+            <ContactoSection />
+          </Box>
         </Box>
       </SectionGate>
 

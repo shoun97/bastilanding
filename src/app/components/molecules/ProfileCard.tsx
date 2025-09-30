@@ -98,7 +98,7 @@ export default function ProfileCard() {
           alignItems="center"
         >
           <IconButton
-            href="https://github.com/"
+            href="https://github.com/Blandskron"
             target="_blank"
             aria-label="GitHub"
             sx={{ p: { xs: 0.75, sm: 1 } }}
@@ -106,7 +106,7 @@ export default function ProfileCard() {
             <GitHubIcon sx={{ fontSize: { xs: 22, sm: 24 } }} />
           </IconButton>
           <IconButton
-            href="https://wa.me/56912345678"
+            href="https://wa.me/56956460650"
             target="_blank"
             aria-label="WhatsApp"
             sx={{ p: { xs: 0.75, sm: 1 } }}
@@ -114,7 +114,7 @@ export default function ProfileCard() {
             <WhatsAppIcon sx={{ fontSize: { xs: 22, sm: 24 } }} />
           </IconButton>
           <IconButton
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/blandskron/"
             target="_blank"
             aria-label="LinkedIn"
             sx={{ p: { xs: 0.75, sm: 1 } }}
@@ -133,7 +133,7 @@ export default function ProfileCard() {
         >
           <Button
             variant="outlined"
-            href="/CV_BastianLandskron.pdf"
+            href="/CV.pdf"
             sx={{
               borderRadius: "360px",
               px: 4,
