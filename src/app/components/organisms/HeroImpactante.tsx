@@ -1,15 +1,13 @@
 "use client";
 import { Box, Typography, Button } from "@mui/material";
-import AnimacionHero from "../molecules/AnimacionHero";
-import AnimatedGradient from "../atoms/AnimatedGradientHero";
-import ImageCluster from "../molecules/ImageCluster"
+import AnimatedEspiral from "../atoms/AnimatedEspiral"; // importa el que hicimos antes
 
 export default function HeroImpactante() {
   return (
     <Box
       sx={{
         position: "relative",
-        height: "100vh",
+        height: "70vh",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
@@ -17,48 +15,53 @@ export default function HeroImpactante() {
         alignItems: "center",
         textAlign: "center",
         px: 2,
+        pt: 4
       }}
     >
-
-      {/* Animación central */}
-      <Box sx={{ zIndex: 2, mb: 2 }}>
-        <AnimacionHero />
+      {/* Fondo animado */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+        }}
+      >
+        {/*  <AnimatedEspiral speed="16s" saturation={1.3} />  a*/}
       </Box>
 
       {/* Texto y botón */}
-      <Box sx={{ zIndex: 2 }}>
+      <Box sx={{ zIndex: 1 }}>
+        {/* Lead */}
         <Typography
           sx={{
-            mt: 2,
-            width: "288px",
+            mt: { xs: 2, sm: 0 },
+            width: { xs: "288px", sm: "520px", md: "760px" }, // ancho más grande en tablet/escritorio
+            mx: "auto", // centrado horizontal
             color: "rgba(255, 255, 255, 0.90)",
             textAlign: "center",
-            fontFeatureSettings: "'liga' off, 'clig' off",
             fontFamily: "Manrope",
-            fontSize: "25px",
-            fontStyle: "normal",
             fontWeight: 200,
-            lineHeight: "133.4%",
+            fontSize: { xs: "20px", sm: "26px", md: "32px" }, // responsive
+            lineHeight: { xs: "133%", md: "130%" },
           }}
         >
-          Donde el desarrollo encuentra su propósito:
+          Donde el desarrollo encuentra su propósito
         </Typography>
 
+        {/* Headline */}
         <Typography
           variant="h4"
-          color="white"
           sx={{
-            mt: 1,
-            width: "288px",
+            mt: { xs: 1, sm: 1.5 },
+            width: { xs: "288px", sm: "520px", md: "760px" },
+            mx: "auto",
             color: "rgba(255, 255, 255, 0.90)",
             textAlign: "center",
-            fontFeatureSettings: "'liga' off, 'clig' off",
             textShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
             fontFamily: "Manrope",
-            fontSize: "40px",
-            fontStyle: "normal",
             fontWeight: 400,
-            lineHeight: "116.7%",
+            fontSize: { xs: "32px", sm: "48px", md: "64px" }, // responsive
+            lineHeight: { xs: "116%", md: "112%" },
           }}
         >
           crear y educar.
@@ -66,19 +69,16 @@ export default function HeroImpactante() {
 
         <Button
           variant="contained"
+          href="#contacto"  
           sx={{
             display: "inline-flex",
             height: "42px",
             marginTop: "46px",
             padding: "8px 22px",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
             borderRadius: "38px",
-            backgroundColor: "#20339F",
-            color: "primary.contrastText",
+            backgroundColor: "#1F2491",
             textTransform: "none",
-            boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.2)",
+            boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.2)",
             fontWeight: 500,
             fontSize: "1rem",
             "&:hover": {
@@ -89,7 +89,7 @@ export default function HeroImpactante() {
           Trabajemos juntos
         </Button>
       </Box>
-      <Box sx={{marginTop: "50px"}}/>
+
 
     </Box>
   );
